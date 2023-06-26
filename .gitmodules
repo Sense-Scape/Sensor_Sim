@@ -1,0 +1,9 @@
+[submodule "Windows_Sensor_Sim/components/Generic_Modules"]
+	path = Windows_Sensor_Sim/components/Generic_Modules
+	url = https://github.com/Sense-Scape/Generic_Modules.git
+[submodule "Windows_Sensor_Sim/components/Windows_Modules"]
+	path = Windows_Sensor_Sim/components/Windows_Modules
+	url = https://github.com/Sense-Scape/Windows_Modules.git
+[submodule "Windows_Sensor_Sim/components/Nlohmann_JSON"]
+	path = Windows_Sensor_Sim/components/Nlohmann_JSON
+	url = https://github.com/Sense-Scape/Nlohmann_JSON.git
