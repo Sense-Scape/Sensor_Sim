@@ -1,5 +1,10 @@
 {
 	"Config": {
+		"SimulatorModule": {
+			"SampleRate_Hz": "44100",
+			"SimulatedFrequency_Hz": "10000",
+			"NumberOfChannels": "1"
+		},
 		"TCPTxModule": {
                 "IP": "127.0.0.1",
                 "Port": "10000"
