@@ -10,3 +10,11 @@ This module is configured uising the ```Config.json``` file.
 - Clone this repo using the ```git clone``` command
 - Run ```git submodule update --remote --recursive --init``` to pull in the submodule code
 - Open the solution file in visual studio and build/run it
+
+## Block Diagram
+
+``` mermaid
+  graph TD;
+  SimulatorModule-->ChunkToBytesModule
+  ChunkToBytesModule-->WinTCPTxModule
+```
