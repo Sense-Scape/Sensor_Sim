@@ -40,7 +40,7 @@ int main()
 	double dSampleRate;
 	double dSimulatedFrequency;
 	unsigned uNumChannels;
-	std::vector<uint8_t> vu8SourceIdentifier = { 0,0 };
+	std::vector<uint8_t> vu8SourceIdentifier = { 0,0 ,1,1,1,1};
 
 	// TCP Tx
 	std::string strTCPTxIP;
@@ -76,19 +76,22 @@ int main()
 	// ------------
 	auto pSimulatorModule = std::make_shared<SimulatorModule>(dSampleRate, 512, uNumChannels, dSimulatedFrequency, vu8SourceIdentifier,10);
 	auto pChunkToBytesModule = std::make_shared<ChunkToBytesModule>(100, 512);
-	auto pTCPRXModule = std::make_shared<WinTCPTxModule>(strTCPTxIP, strTCPTxPort, 100, 512);
+	auto pTCPTXModule = std::make_shared<WinTCPTxModule>(strTCPTxIP, strTCPTxPort, 100, 512);
+	
+	std::vector<float> vfPhases_deg = { 0, 0 };
+	pSimulatorModule->SetChannelPhases(vfPhases_deg);
 
 	// ------------
 	// Connection
 	// ------------
 	pSimulatorModule->SetNextModule(pChunkToBytesModule);
-	pChunkToBytesModule->SetNextModule(pTCPRXModule);
-	pTCPRXModule->SetNextModule(nullptr);
+	pChunkToBytesModule->SetNextModule(pTCPTXModule);
+	pTCPTXModule->SetNextModule(nullptr);
 
 	// ------------
 	// Start-Up
 	// ------------
-	pTCPRXModule->StartProcessing();
+	pTCPTXModule->StartProcessing();
 	pChunkToBytesModule->StartProcessing();
 	pSimulatorModule->StartProcessing();
 	
