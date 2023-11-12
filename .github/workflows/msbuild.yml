@@ -24,10 +24,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-
-    - name: Set Max CPU
-      run: echo "MSBUILD_ARGS=/m:1" >> $GITHUB_ENV
-
     - name: Enable long file paths
       run: git config --system core.longpaths true
 
@@ -45,4 +41,4 @@ jobs:
     - name: Build
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}} /m:1 # /m:1 set to one parallel build
