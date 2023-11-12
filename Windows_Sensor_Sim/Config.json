@@ -1,8 +1,13 @@
 {
+	"LoggingConfig": {
+		"LoggingLevel": "Info",
+		"LogToTextFile": "False",
+		"LogToConsole": "True"
+	},
 	"Config": {
 		"SimulatorModule": {
 			"SampleRate_Hz": "44100",
-			"SimulatedFrequency_Hz": "861",
+			"SimulatedFrequency_Hz": "2000",
 			"NumberOfChannels": "2"
 		},
 		"TCPTxModule": {

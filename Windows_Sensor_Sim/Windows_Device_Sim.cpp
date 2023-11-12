@@ -26,11 +26,85 @@
 #include "SimulatorModule.h"
 #include "ChunkToBytesModule.h"
 
-/*External Libraries*/
+/* External Libraries */
+#include <plog/Appenders/ColorConsoleAppender.h>
+#include <plog/Appenders/RollingFileAppender.h>
 #include "json.hpp"
 
 int main()
 {
+
+	// ---------------------
+	// Logging Configuration
+	// ---------------------
+
+	// Reading and parsing JSON config
+	std::ifstream file("./Config.json");
+	std::string jsonString((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	nlohmann::json jsonConfig = nlohmann::json::parse(jsonString);
+
+	try // To configure logging
+	{
+		auto eLogLevel = plog::debug;
+
+		// Get log level
+		std::string strRequestLogLevel = jsonConfig["LoggingConfig"]["LoggingLevel"];
+		std::transform(strRequestLogLevel.begin(), strRequestLogLevel.end(), strRequestLogLevel.begin(), [](unsigned char c) {
+			return std::toupper(c);
+			});
+
+		// Select log level
+		if (strRequestLogLevel == "DEBUG")
+			eLogLevel = plog::debug;
+		else if (strRequestLogLevel == "INFO")
+			eLogLevel = plog::info;
+		else if (strRequestLogLevel == "WARNING")
+			eLogLevel = plog::warning;
+		if (strRequestLogLevel == "ERROR")
+			eLogLevel = plog::error;
+		else
+			eLogLevel = plog::debug;
+
+		// And create loggers the after try append to it
+		auto& logger = plog::init(eLogLevel);
+
+		// Check if one should log to files
+		std::string strLogToFile = jsonConfig["LoggingConfig"]["LogToTextFile"];
+		std::transform(strLogToFile.begin(), strLogToFile.end(), strLogToFile.begin(), [](unsigned char c) {
+			return std::toupper(c);
+			});
+
+		if (strLogToFile == "TRUE")
+		{
+			// Get the time for the log file
+			time_t lTime;
+			time(&lTime);
+			auto strTime = std::to_string((long long)lTime);
+			std::string strLogFileName = "PL_Windows_Proc_Serv_" + strTime + ".txt";
+
+			// The create and add the appender
+			static plog::RollingFileAppender<plog::CsvFormatter> fileAppender(strLogFileName.c_str(), 50'000'000, 2);
+			logger.addAppender(&fileAppender);
+		}
+
+		// And to console
+		std::string strLogToConsole = jsonConfig["LoggingConfig"]["LogToConsole"];
+		std::transform(strLogToConsole.begin(), strLogToConsole.end(), strLogToConsole.begin(), [](unsigned char c) {
+			return std::toupper(c);
+			});
+
+		if (strLogToConsole == "TRUE")
+		{
+			static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender;
+			logger.addAppender(&consoleAppender);
+		}
+
+	}
+	catch (const std::exception& e)
+	{
+		PLOG_ERROR << e.what();
+		throw;
+	}
 
 	// ----------------
 	// Config Variables
@@ -46,14 +120,8 @@ int main()
 	std::string strTCPTxIP;
 	std::string strTCPTxPort;
 
-
 	try
 	{	
-		// Reading and parsing JSON config
-		std::ifstream file("./Config.json");
-		std::string jsonString((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-		nlohmann::json jsonConfig = nlohmann::json::parse(jsonString);
-
 		// Updating config variables 
 		// Simulator Module Config
 		dSampleRate = std::stod((std::string)jsonConfig["Config"]["SimulatorModule"]["SampleRate_Hz"]);
