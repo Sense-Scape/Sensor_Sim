@@ -1,0 +1,20 @@
+{
+	"Config": {
+		"Network": {
+            "UDPRx": {
+                "IP": "127.0.0.1",
+                "Port": "8080"
+            },
+            "UDPTx": {
+                "IP": "127.0.0.1",
+                "Port": "8081"
+            }   
+		},
+		"FileSystem":{
+			"RecordingPath": "D:/Recordings_All/RecordingsAgain2"
+		},
+		"RecordingParameters" : {
+			"RecordingPeriod": 10			
+		}
+	}
+}
