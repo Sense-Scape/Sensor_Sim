@@ -4,11 +4,15 @@
 		"LogToTextFile": "False",
 		"LogToConsole": "True"
 	},
-	"Config": {
+	"PipelineConfig": {
 		"SimulatorModule": {
 			"SampleRate_Hz": "44100",
 			"SimulatedFrequency_Hz": "2000",
-			"NumberOfChannels": "2"
+			"NumberOfChannels": "2",
+			"ChannelPhases_deg": [
+				0,
+				0
+			]
 		},
 		"TCPTxModule": {
 			"IP": "127.0.0.1",

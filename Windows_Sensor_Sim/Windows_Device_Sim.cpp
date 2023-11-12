@@ -114,6 +114,7 @@ int main()
 	double dSampleRate;
 	double dSimulatedFrequency;
 	unsigned uNumChannels;
+	std::vector<float> vfChannelPhases_deg = {};
 	std::vector<uint8_t> vu8SourceIdentifier = { 0,0 ,1,1,1,1};
 
 	// TCP Tx
@@ -124,13 +125,20 @@ int main()
 	{	
 		// Updating config variables 
 		// Simulator Module Config
-		dSampleRate = std::stod((std::string)jsonConfig["Config"]["SimulatorModule"]["SampleRate_Hz"]);
-		dSimulatedFrequency = std::stod((std::string)jsonConfig["Config"]["SimulatorModule"]["SimulatedFrequency_Hz"]);
-		uNumChannels = std::stoul((std::string)jsonConfig["Config"]["SimulatorModule"]["NumberOfChannels"]);
+		dSampleRate = std::stod((std::string)jsonConfig["PipelineConfig"]["SimulatorModule"]["SampleRate_Hz"]);
+		dSimulatedFrequency = std::stod((std::string)jsonConfig["PipelineConfig"]["SimulatorModule"]["SimulatedFrequency_Hz"]);
+		uNumChannels = std::stoul((std::string)jsonConfig["PipelineConfig"]["SimulatorModule"]["NumberOfChannels"]);
+		vfChannelPhases_deg = jsonConfig["PipelineConfig"]["SimulatorModule"]["ChannelPhases_deg"].get<std::vector<float>>();
+		if (vfChannelPhases_deg.size() != uNumChannels)
+		{
+			std::string strFatal = std::string(__FUNCTION__) + "Channel phase count does to equal channel count";
+			PLOG_FATAL << strFatal;
+			throw;
+		}
 
 		// TCP Module Config
-		strTCPTxIP = jsonConfig["Config"]["TCPTxModule"]["IP"];
-		strTCPTxPort = jsonConfig["Config"]["TCPTxModule"]["Port"];
+		strTCPTxIP = jsonConfig["PipelineConfig"]["TCPTxModule"]["IP"];
+		strTCPTxPort = jsonConfig["PipelineConfig"]["TCPTxModule"]["Port"];
 		
 	}
 	catch (const std::exception& e)
@@ -146,8 +154,8 @@ int main()
 	auto pChunkToBytesModule = std::make_shared<ChunkToBytesModule>(100, 512);
 	auto pTCPTXModule = std::make_shared<WinTCPTxModule>(strTCPTxIP, strTCPTxPort, 100, 512);
 	
-	std::vector<float> vfPhases_deg = { 0, 0 };
-	pSimulatorModule->SetChannelPhases(vfPhases_deg);
+
+	pSimulatorModule->SetChannelPhases(vfChannelPhases_deg, "Degree");
 
 	// ------------
 	// Connection
