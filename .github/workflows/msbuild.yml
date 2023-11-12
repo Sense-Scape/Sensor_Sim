@@ -22,14 +22,11 @@ permissions:
 jobs:
   build:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        max-cpu: [1]
 
     steps:
 
     - name: Set Max CPU
-      run: echo "::set-env name=MSBUILD_ARGS::/m:${{ matrix.max-cpu }}"
+        run: echo "MSBUILD_ARGS=/m:1" >> $GITHUB_ENV
 
     - name: Enable long file paths
       run: git config --system core.longpaths true
