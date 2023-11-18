@@ -52,7 +52,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          build/PL_Windows_Proc_Serv.zip
+          build/Windows_Sensor_Sim.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
