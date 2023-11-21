@@ -115,7 +115,7 @@ int main()
 	double dSimulatedFrequency;
 	unsigned uNumChannels;
 	std::vector<float> vfChannelPhases_deg = {};
-	std::vector<uint8_t> vu8SourceIdentifier = { 0,0 ,1,1,1,1};
+	std::vector<uint8_t> vu8SourceIdentifier = { 0 };
 
 	// TCP Tx
 	std::string strTCPTxIP;
@@ -129,6 +129,7 @@ int main()
 		dSimulatedFrequency = std::stod((std::string)jsonConfig["PipelineConfig"]["SimulatorModule"]["SimulatedFrequency_Hz"]);
 		uNumChannels = std::stoul((std::string)jsonConfig["PipelineConfig"]["SimulatorModule"]["NumberOfChannels"]);
 		vfChannelPhases_deg = jsonConfig["PipelineConfig"]["SimulatorModule"]["ChannelPhases_deg"].get<std::vector<float>>();
+		vu8SourceIdentifier = jsonConfig["PipelineConfig"]["SimulatorModule"]["SourceIdentifier"].get<std::vector<uint8_t>>();
 		if (vfChannelPhases_deg.size() != uNumChannels)
 		{
 			std::string strFatal = std::string(__FUNCTION__) + "Channel phase count does to equal channel count";
