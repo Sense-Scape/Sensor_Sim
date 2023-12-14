@@ -25,6 +25,7 @@
 #include "WinTCPTxModule.h"
 #include "SimulatorModule.h"
 #include "ChunkToBytesModule.h"
+#include "WinMultiClientTCPTxModule.h"
 
 /* External Libraries */
 #include <plog/Appenders/ColorConsoleAppender.h>
@@ -153,7 +154,7 @@ int main()
 	// ------------
 	auto pSimulatorModule = std::make_shared<SimulatorModule>(dSampleRate, 512, uNumChannels, dSimulatedFrequency, vu8SourceIdentifier,10);
 	auto pChunkToBytesModule = std::make_shared<ChunkToBytesModule>(100, 512);
-	auto pTCPTXModule = std::make_shared<WinTCPTxModule>(strTCPTxIP, strTCPTxPort, 100, 512);
+	auto pTCPTXModule = std::make_shared<WinMultiClientTCPTxModule>(strTCPTxIP, strTCPTxPort, 100, 512);
 	
 
 	pSimulatorModule->SetChannelPhases(vfChannelPhases_deg, "Degree");
