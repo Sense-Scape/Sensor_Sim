@@ -1,6 +1,6 @@
 # Windows_Sensor_Sim
 
-## Summary
+## System Summary
 
 This is an audio simulation module which sends is designed to send data to a [processing server](https://github.com/Sense-Scape/Windows_Proc_Serv).
 This module is configured uising the ```Config.json``` file. 
