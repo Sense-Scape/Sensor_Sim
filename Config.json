@@ -1,20 +1,26 @@
 {
-	"Config": {
-		"Network": {
-            "UDPRx": {
-                "IP": "127.0.0.1",
-                "Port": "8080"
-            },
-            "UDPTx": {
-                "IP": "127.0.0.1",
-                "Port": "8081"
-            }   
+	"LoggingConfig": {
+		"LoggingLevel": "Info",
+		"LogToTextFile": "True",
+		"LogToConsole": "True"
+	},
+	"PipelineConfig": {
+		"SimulatorModule": {
+			"SampleRate_Hz": "8000",
+			"SimulatedFrequency_Hz": "400",
+			"NumberOfChannels": "2",
+			"SourceIdentifier": [
+				0,
+				1
+			],
+			"ChannelPhases_deg": [
+				0,
+				45
+			]
 		},
-		"FileSystem":{
-			"RecordingPath": "D:/Recordings_All/RecordingsAgain2"
-		},
-		"RecordingParameters" : {
-			"RecordingPeriod": 10			
+		"TCPTxModule": {
+			"IP": "127.0.0.1",
+			"Port": "10000"
 		}
 	}
 }
