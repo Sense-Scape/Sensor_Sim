@@ -1,4 +1,4 @@
-# Windows_Sensor_Sim
+# Windows Sensor Simulator
 
 ## Summary
 
