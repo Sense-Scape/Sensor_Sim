@@ -61,7 +61,7 @@ int main()
 			eLogLevel = plog::info;
 		else if (strRequestLogLevel == "WARNING")
 			eLogLevel = plog::warning;
-		if (strRequestLogLevel == "ERROR")
+		else if (strRequestLogLevel == "ERROR")
 			eLogLevel = plog::error;
 		else
 			eLogLevel = plog::debug;
