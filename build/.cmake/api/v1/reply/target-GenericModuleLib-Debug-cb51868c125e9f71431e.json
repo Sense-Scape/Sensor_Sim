@@ -1,0 +1,206 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "Generic_Modules/libGenericModuleLib.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"Sensor_Sim/components/Generic_Modules/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 18,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 35,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g"
+				},
+				{
+					"fragment" : "-std=gnu++20"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/include_tests"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/components/Base_Module/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/components/Nlohmann_JSON/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/components/Nlohmann_JSON/include/nlohmann"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/components/Base_Module/components/plog/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/components/kissfft"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9
+			]
+		}
+	],
+	"id" : "GenericModuleLib::@efccbf0a994b6439c788",
+	"name" : "GenericModuleLib",
+	"nameOnDisk" : "libGenericModuleLib.a",
+	"paths" : 
+	{
+		"build" : "Generic_Modules",
+		"source" : "Sensor_Sim/components/Generic_Modules"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/source/ChunkToBytesModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/source/FFTModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/source/HPFModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/source/RouterModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/source/SessionProcModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/source/SimulatorModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/source/TimeToWAVModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/source/ToJSONModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/source/WAVAccumulator.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/source/WatchdogModule.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

@@ -13,19 +13,12 @@
 
 /*Custom Includes*/
 #include "BaseModule.h"
-#include "WinUDPRxModule.h"
 #include "SessionProcModule.h"
 #include "RouterModule.h"
 #include "WAVAccumulator.h"
-#include "WAVWriterModule.h"
-#include "TimeToWAVModule.h"
-#include "HPFModule.h"
-#include "WinUDPTxModule.h"
-#include "WinTCPRxModule.h"
-#include "WinTCPTxModule.h"
+#include "LinuxMultiClientTCPTxModule.h"
 #include "SimulatorModule.h"
 #include "ChunkToBytesModule.h"
-#include "WinMultiClientTCPTxModule.h"
 
 /* External Libraries */
 #include <plog/Appenders/ColorConsoleAppender.h>
@@ -50,9 +43,8 @@ int main()
 
 		// Get log level
 		std::string strRequestLogLevel = jsonConfig["LoggingConfig"]["LoggingLevel"];
-		std::transform(strRequestLogLevel.begin(), strRequestLogLevel.end(), strRequestLogLevel.begin(), [](unsigned char c) {
-			return std::toupper(c);
-			});
+		std::transform(strRequestLogLevel.begin(), strRequestLogLevel.end(), strRequestLogLevel.begin(), [](unsigned char c)
+					   { return std::toupper(c); });
 
 		// Select log level
 		if (strRequestLogLevel == "DEBUG")
@@ -67,13 +59,12 @@ int main()
 			eLogLevel = plog::debug;
 
 		// And create loggers the after try append to it
-		auto& logger = plog::init(eLogLevel);
+		auto &logger = plog::init(eLogLevel);
 
 		// Check if one should log to files
 		std::string strLogToFile = jsonConfig["LoggingConfig"]["LogToTextFile"];
-		std::transform(strLogToFile.begin(), strLogToFile.end(), strLogToFile.begin(), [](unsigned char c) {
-			return std::toupper(c);
-			});
+		std::transform(strLogToFile.begin(), strLogToFile.end(), strLogToFile.begin(), [](unsigned char c)
+					   { return std::toupper(c); });
 
 		if (strLogToFile == "TRUE")
 		{
@@ -90,18 +81,16 @@ int main()
 
 		// And to console
 		std::string strLogToConsole = jsonConfig["LoggingConfig"]["LogToConsole"];
-		std::transform(strLogToConsole.begin(), strLogToConsole.end(), strLogToConsole.begin(), [](unsigned char c) {
-			return std::toupper(c);
-			});
+		std::transform(strLogToConsole.begin(), strLogToConsole.end(), strLogToConsole.begin(), [](unsigned char c)
+					   { return std::toupper(c); });
 
 		if (strLogToConsole == "TRUE")
 		{
 			static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender;
 			logger.addAppender(&consoleAppender);
 		}
-
 	}
-	catch (const std::exception& e)
+	catch (const std::exception &e)
 	{
 		PLOG_ERROR << e.what();
 		throw;
@@ -116,15 +105,15 @@ int main()
 	double dSimulatedFrequency;
 	unsigned uNumChannels;
 	std::vector<float> vfChannelPhases_deg = {};
-	std::vector<uint8_t> vu8SourceIdentifier = { 0 };
+	std::vector<uint8_t> vu8SourceIdentifier = {0};
 
 	// TCP Tx
 	std::string strTCPTxIP;
 	std::string strTCPTxPort;
 
 	try
-	{	
-		// Updating config variables 
+	{
+		// Updating config variables
 		// Simulator Module Config
 		dSampleRate = std::stod((std::string)jsonConfig["PipelineConfig"]["SimulatorModule"]["SampleRate_Hz"]);
 		dSimulatedFrequency = std::stod((std::string)jsonConfig["PipelineConfig"]["SimulatorModule"]["SimulatedFrequency_Hz"]);
@@ -141,21 +130,19 @@ int main()
 		// TCP Module Config
 		strTCPTxIP = jsonConfig["PipelineConfig"]["TCPTxModule"]["IP"];
 		strTCPTxPort = jsonConfig["PipelineConfig"]["TCPTxModule"]["Port"];
-		
 	}
-	catch (const std::exception& e)
+	catch (const std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 		throw;
 	}
-	
+
 	// ------------
 	// Construction
 	// ------------
-	auto pSimulatorModule = std::make_shared<SimulatorModule>(dSampleRate, 512, uNumChannels, dSimulatedFrequency, vu8SourceIdentifier,10);
+	auto pSimulatorModule = std::make_shared<SimulatorModule>(dSampleRate, 512, uNumChannels, dSimulatedFrequency, vu8SourceIdentifier, 10);
 	auto pChunkToBytesModule = std::make_shared<ChunkToBytesModule>(100, 512);
-	auto pTCPTXModule = std::make_shared<WinMultiClientTCPTxModule>(strTCPTxIP, strTCPTxPort, 100, 512);
-	
+	auto pTCPTXModule = std::make_shared<LinuxMultiClientTCPTxModule>(strTCPTxIP, strTCPTxPort, 100, 512);
 
 	pSimulatorModule->SetChannelPhases(vfChannelPhases_deg, "Degree");
 
@@ -172,7 +159,7 @@ int main()
 	pTCPTXModule->StartProcessing();
 	pChunkToBytesModule->StartProcessing();
 	pSimulatorModule->StartProcessing();
-	
+
 	while (1)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));

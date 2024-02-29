@@ -1,0 +1,162 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "Linux_Modules/libLinuxModulesLib.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"Sensor_Sim/components/Linux_Modules/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 18,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 35,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g"
+				},
+				{
+					"fragment" : "-std=gnu++20"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Linux_Modules/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Linux_Modules/include_tests"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Linux_Modules/components/Base_Module/components/Chunk_Types/components/Nlohmann_JSON/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Linux_Modules/components/Base_Module/components/Chunk_Types/components/Nlohmann_JSON/include/nlohmann"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Linux_Modules/components/Base_Module/components/Chunk_Types"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Linux_Modules/components/Base_Module/components/Chunk_Types/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Linux_Modules/components/Base_Module/components/plog/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Linux_Modules/components/Base_Module/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		}
+	],
+	"id" : "LinuxModulesLib::@a7822ca00ffd50bfac1d",
+	"name" : "LinuxModulesLib",
+	"nameOnDisk" : "libLinuxModulesLib.a",
+	"paths" : 
+	{
+		"build" : "Linux_Modules",
+		"source" : "Sensor_Sim/components/Linux_Modules"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Linux_Modules/source/LinuxMultiClientTCPRxModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Linux_Modules/source/LinuxMultiClientTCPTxModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Linux_Modules/source/LinuxTCPTxModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Linux_Modules/source/LinuxWAVWriterModule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Linux_Modules/source/SoundCardInterfaceModule.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

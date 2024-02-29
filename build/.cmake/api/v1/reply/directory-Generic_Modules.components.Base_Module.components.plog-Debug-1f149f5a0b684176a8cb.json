@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "Generic_Modules/components/Base_Module/components/plog",
+		"source" : "Sensor_Sim/components/Generic_Modules/components/Base_Module/components/plog"
+	}
+}

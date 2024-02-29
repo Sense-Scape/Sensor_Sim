@@ -1,0 +1,185 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "Generic_Modules/components/Base_Module/components/Chunk_Types/libChunkTypesLib.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_include_directories",
+			"target_link_libraries"
+		],
+		"files" : 
+		[
+			"Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 33,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 43,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 61,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g"
+				},
+				{
+					"fragment" : "-std=gnu++20"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/components/Nlohmann_JSON/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/components/Nlohmann_JSON/include/nlohmann"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/gnorrie/SenseScape/Windows_Sensor_Sim/Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/components/doctest"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					3
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8
+			]
+		}
+	],
+	"id" : "ChunkTypesLib::@f68c82f191ad6ba99db0",
+	"name" : "ChunkTypesLib",
+	"nameOnDisk" : "libChunkTypesLib.a",
+	"paths" : 
+	{
+		"build" : "Generic_Modules/components/Base_Module/components/Chunk_Types",
+		"source" : "Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/source/BaseChunk.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/source/ByteChunk.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/source/CoordinateChunk.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/source/FFTChunk.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/source/FFTMagnitudeChunk.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/source/JSONChunk.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/source/TimeChunk.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/source/WAVChunk.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Sensor_Sim/components/Generic_Modules/components/Base_Module/components/Chunk_Types/source/WatchdogChunk.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}
