@@ -11,7 +11,9 @@ message(STATUS "Building for Unix")
 set(CMAKE_CXX_STANDARD 20)
 
 # For audio interface
-find_library(ALSA_LIBRARY asound)
+find_library(ALSA_LIBRARY asound REQUIRED)
+
+find_library(SND_LIBRARY sndfile REQUIRED)
 
 # Add an executable target
 add_executable(Sensor_Sim Sensor_Sim/main.cpp)

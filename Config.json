@@ -2,12 +2,13 @@
 	"LoggingConfig": {
 		"_Comment": "Specify logging methodology of the program",
 		"LoggingLevel": "Info",
-		"LogToTextFile": "True",
+		"LogToTextFile": "False",
 		"LogToConsole": "True"
 	},
 	"PipelineConfig": {
 		"SimulatorModule": {
 			"_Comment": "Specify sample rate, simulated frequency, number of channels and phase offset of each channel",
+			"Enabled": "False",
 			"SampleRate_Hz": "8000",
 			"SimulatedFrequency_Hz": "400",
 			"NumberOfChannels": "2",
@@ -19,6 +20,11 @@
 				0,
 				45
 			]
+		},
+		"PlaybackModule": {
+			"_Comment": "Will repeatedly playback WAV files in specied directory",
+			"Enabled": "True",
+			"Directory": "./"
 		},
 		"TCPTxModule": {
 			"_Comment": "Specify destination IP and port on which to communicate",
