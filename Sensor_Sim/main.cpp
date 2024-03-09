@@ -19,6 +19,7 @@
 #include "LinuxMultiClientTCPTxModule.h"
 #include "SimulatorModule.h"
 #include "ChunkToBytesModule.h"
+#include "LinuxWAVReaderModule.h"
 
 /* External Libraries */
 #include <plog/Appenders/ColorConsoleAppender.h>
@@ -72,7 +73,7 @@ int main()
 			time_t lTime;
 			time(&lTime);
 			auto strTime = std::to_string((long long)lTime);
-			std::string strLogFileName = "PL_Windows_Proc_Serv_" + strTime + ".txt";
+			std::string strLogFileName = "Sensor_Sim_" + strTime + ".log";
 
 			// The create and add the appender
 			static plog::RollingFileAppender<plog::CsvFormatter> fileAppender(strLogFileName.c_str(), 50'000'000, 2);
@@ -101,9 +102,15 @@ int main()
 	// ----------------
 
 	// Simuator Module
+	bool bSimulatorEnabled = false;
 	double dSampleRate;
 	double dSimulatedFrequency;
 	unsigned uNumChannels;
+
+	// Playback Module
+	bool bPlaybackEnabled = false;
+	std::string sPlaybackDirectory;
+
 	std::vector<float> vfChannelPhases_deg = {};
 	std::vector<uint8_t> vu8SourceIdentifier = {0};
 
@@ -115,6 +122,9 @@ int main()
 	{
 		// Updating config variables
 		// Simulator Module Config
+		std::istringstream issSimulatorEnabled = std::istringstream(jsonConfig["PipelineConfig"]["SimulatorModule"]["Enabled"].get<std::string>());
+		issSimulatorEnabled >> std::boolalpha >> bSimulatorEnabled;
+		std::cout << "1" << std::endl;
 		dSampleRate = std::stod((std::string)jsonConfig["PipelineConfig"]["SimulatorModule"]["SampleRate_Hz"]);
 		dSimulatedFrequency = std::stod((std::string)jsonConfig["PipelineConfig"]["SimulatorModule"]["SimulatedFrequency_Hz"]);
 		uNumChannels = std::stoul((std::string)jsonConfig["PipelineConfig"]["SimulatorModule"]["NumberOfChannels"]);
@@ -126,6 +136,12 @@ int main()
 			PLOG_FATAL << strFatal;
 			throw;
 		}
+
+		// Playback Module
+		std::istringstream issPlaybackEnabled = std::istringstream(jsonConfig["PipelineConfig"]["PlaybackModule"]["Enabled"].get<std::string>());
+		issPlaybackEnabled >> std::boolalpha >> bPlaybackEnabled;
+
+		sPlaybackDirectory = jsonConfig["PipelineConfig"]["PlaybackModule"]["Directory"].get<std::string>();
 
 		// TCP Module Config
 		strTCPTxIP = jsonConfig["PipelineConfig"]["TCPTxModule"]["IP"];
@@ -141,24 +157,32 @@ int main()
 	// Construction
 	// ------------
 	auto pSimulatorModule = std::make_shared<SimulatorModule>(dSampleRate, 512, uNumChannels, dSimulatedFrequency, vu8SourceIdentifier, 10);
+	pSimulatorModule->SetChannelPhases(vfChannelPhases_deg, "Degree");
+
+	auto pLinuxWAVReader = std::make_shared<LinuxWAVReaderModule>(sPlaybackDirectory, 512, 100);
+
 	auto pChunkToBytesModule = std::make_shared<ChunkToBytesModule>(100, 512);
 	auto pTCPTXModule = std::make_shared<LinuxMultiClientTCPTxModule>(strTCPTxIP, strTCPTxPort, 100, 512);
-
-	pSimulatorModule->SetChannelPhases(vfChannelPhases_deg, "Degree");
 
 	// ------------
 	// Connection
 	// ------------
 	pSimulatorModule->SetNextModule(pChunkToBytesModule);
+	pLinuxWAVReader->SetNextModule(pChunkToBytesModule);
 	pChunkToBytesModule->SetNextModule(pTCPTXModule);
 	pTCPTXModule->SetNextModule(nullptr);
 
 	// ------------
 	// Start-Up
 	// ------------
+	if (bSimulatorEnabled)
+		pSimulatorModule->StartProcessing();
+	if (bPlaybackEnabled)
+		pLinuxWAVReader->StartProcessing();
+
 	pTCPTXModule->StartProcessing();
 	pChunkToBytesModule->StartProcessing();
-	pSimulatorModule->StartProcessing();
+	pLinuxWAVReader->StartProcessing();
 
 	while (1)
 	{
