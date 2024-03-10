@@ -156,10 +156,16 @@ int main()
 	// ------------
 	// Construction
 	// ------------
-	auto pSimulatorModule = std::make_shared<SimulatorModule>(dSampleRate, 512, uNumChannels, dSimulatedFrequency, vu8SourceIdentifier, 10);
-	pSimulatorModule->SetChannelPhases(vfChannelPhases_deg, "Degree");
+	std::shared_ptr<SimulatorModule> pSimulatorModule;
+	if (bSimulatorEnabled)
+	{
+		pSimulatorModule = std::make_shared<SimulatorModule>(dSampleRate, 512, uNumChannels, dSimulatedFrequency, vu8SourceIdentifier, 10);
+		pSimulatorModule->SetChannelPhases(vfChannelPhases_deg, "Degree");
+	}
 
-	auto pLinuxWAVReader = std::make_shared<LinuxWAVReaderModule>(sPlaybackDirectory, 512, 100);
+	std::shared_ptr<LinuxWAVReaderModule> pLinuxWAVReader;
+	if (bPlaybackEnabled)
+		auto pLinuxWAVReader = std::make_shared<LinuxWAVReaderModule>(sPlaybackDirectory, 512, 100);
 
 	auto pChunkToBytesModule = std::make_shared<ChunkToBytesModule>(100, 512);
 	auto pTCPTXModule = std::make_shared<LinuxMultiClientTCPTxModule>(strTCPTxIP, strTCPTxPort, 100, 512);
@@ -167,8 +173,11 @@ int main()
 	// ------------
 	// Connection
 	// ------------
-	pSimulatorModule->SetNextModule(pChunkToBytesModule);
-	pLinuxWAVReader->SetNextModule(pChunkToBytesModule);
+	if (bSimulatorEnabled)
+		pSimulatorModule->SetNextModule(pChunkToBytesModule);
+	if (bPlaybackEnabled)
+		pLinuxWAVReader->SetNextModule(pChunkToBytesModule);
+
 	pChunkToBytesModule->SetNextModule(pTCPTXModule);
 	pTCPTXModule->SetNextModule(nullptr);
 
@@ -182,7 +191,6 @@ int main()
 
 	pTCPTXModule->StartProcessing();
 	pChunkToBytesModule->StartProcessing();
-	pLinuxWAVReader->StartProcessing();
 
 	while (1)
 	{
