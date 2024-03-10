@@ -21,7 +21,7 @@ jobs:
         sudo apt-get install libsndfile1-dev
 
     - name: Checkout project and submodules
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules: recursive
 
@@ -36,7 +36,7 @@ jobs:
         mkdir build/toZip
         ls
         cp build/${{env.BUILD_NAME}} build/toZip/${{env.BUILD_NAME}}
-        cp ${{env.BUILD_NAME}}/Config.json build/toZip/Config.json
+        cp Config.json build/toZip/Config.json
         cp README.md build/toZip/README.md
 
     - name: Zip Docs and Build
